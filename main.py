@@ -60,19 +60,24 @@ class CalcApp(App):
     def on_button_press(self, instance):
         if instance.text == "C":
             self.solution.text = ""
+
         elif instance.text == "=":
             try:
                 self.solution.text = str(eval(self.solution.text))
             except:
                 self.solution.text = "Error"
+
         elif instance.text == "%":
             self.solution.text += "*0.01"
+
         elif instance.text == "<-":
             length_string = len(str(self.solution.text))
             delete_last = str(self.solution.text[:length_string-1])
             self.solution.text = delete_last
+
         elif instance.text == "e":
             self.solution.text += "2.71828183"
+
         else:
             self.solution.text += instance.text
 
