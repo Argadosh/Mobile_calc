@@ -2,6 +2,9 @@ from kivy.app import App
 from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.textinput import TextInput
+from kivy.core.window import Window
+
+Window.clearcolor = (255/255, 186/255, 3/255, 1)
 
 
 class CalcApp(App):
@@ -18,6 +21,8 @@ class CalcApp(App):
             h_layout = BoxLayout()
             for label in row:
                 memory_buttons = Button(text=label, pos_hint={"center_x": 0.5, "center_y": 0.5})
+                memory_buttons.font_size = 30
+                memory_buttons.background_color = [123/255, 250/255, 45/255, 1]
                 memory_buttons.bind(on_press=self.on_memory_button_press)
                 h_layout.add_widget(memory_buttons)
             main_layout.add_widget(h_layout)
@@ -25,17 +30,20 @@ class CalcApp(App):
         main_layout.add_widget(self.solution)
 
         buttons = [
-            ["C", "<-", "%", "/"],
+            ["e", "π", "(", ")"],
+            ["√", "<-", "%", "/"],
             ["7", "8", "9", "*"],
             ["4", "5", "6", "-"],
             ["1", "2", "3", "+"],
-            ["e", "0", ".", "="],
+            ["C", "0", ".", "="],
         ]
 
         for row in buttons:
             h_layout = BoxLayout()
             for label in row:
                 button = Button(text=label, pos_hint={"center_x": 0.5, "center_y": 0.5})
+                button.font_size = 30
+                button.background_color = [123/255, 250/255, 45/255, 1]
                 button.bind(on_press=self.on_button_press)
                 h_layout.add_widget(button)
             main_layout.add_widget(h_layout)
@@ -69,6 +77,18 @@ class CalcApp(App):
 
         elif instance.text == "%":
             self.solution.text += "*0.01"
+
+        elif instance.text == "π":
+            self.solution.text += "3.1415"
+
+        elif instance.text == "√":
+            self.solution.text += "**(0.5)"
+
+        elif instance.text == "(":
+            self.solution.text += "("
+
+        elif instance.text == ")":
+            self.solution.text = ")"
 
         elif instance.text == "<-":
             length_string = len(str(self.solution.text))
